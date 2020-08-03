@@ -8,7 +8,7 @@ from rest_framework.reverse import reverse
 
 from rest_framework import status
 from rest_framework import permissions
-
+from rest_framework.permissions import IsAuthenticated
 from snippets.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 
@@ -41,8 +41,9 @@ class SnippetViewSet(viewsets.ModelViewSet):
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly,
+    #                       IsOwnerOrReadOnly]
+    permission_classes = (IsAuthenticated,)
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
