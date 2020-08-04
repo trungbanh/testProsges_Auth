@@ -25,8 +25,7 @@ SECRET_KEY = 'x1g5e(b@lj0o_ct730!g-+6^q7y^qb72z&&kjpv83(w&q&tk#6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['daa40258e15b.ngrok.io']
 
 # Application definition
 
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'snippets.apps.SnippetsConfig',
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -71,9 +71,7 @@ TEMPLATES = [
 ]
 
 
-
 WSGI_APPLICATION = 'tutorial.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -112,7 +110,8 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10
