@@ -16,6 +16,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework import renderers
 
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
+
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -43,7 +45,7 @@ class SnippetViewSet(viewsets.ModelViewSet):
     serializer_class = SnippetSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly,
     #                       IsOwnerOrReadOnly]
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,TokenHasReadWriteScope)
 
     @action(detail=True, renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
